@@ -5,6 +5,8 @@ A Metalsmith plugin for [PostCSS](https://github.com/postcss/postcss/).
 ## Explanation
 Use PostCSS and PostCSS plugins with Metalsmith.
 
+You mustn't forget to install the PostCSS plugins with `npm install` first.
+
 ## Install
 
 `npm install metalsmith-with-postcss --save`
