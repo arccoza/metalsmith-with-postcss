@@ -1,0 +1,82 @@
+var path = require('path');
+// var Promise = require('promise');
+var minimatch = require("minimatch");
+var postcss = require('postcss');
+
+
+module.exports = exports = function(options) {
+  var defaults = {
+    pattern: ['**/*.css', '!**/_*/*', '!**/_*'],
+    plugins: {},
+    map: {inline: true}
+  }
+  options = options ? Object.assign(defaults, options) : defaults;
+  options.pattern = Array.isArray(options.pattern) ? options.pattern : [options.pattern];
+  var plugin = null;
+  var plugins = [];
+  var pluginKeys = Object.keys(options.plugins);
+
+  if(typeof options.plugins == 'object' && pluginKeys.length)
+    for(var i = 0, name; name = pluginKeys[i++];) {
+      var args = options.plugins[name];
+      // console.log(name, args);
+      plugin = require(name);
+      plugins.push(plugin(args));
+    }
+  else
+    throw new Error('[metalsmith-with-postcss] You must provide some PostCSS plugins.');
+
+  var processor = postcss(plugins);
+  
+  return function metalsmithPostcss(files, metalsmith, done){
+    var allKeys = Object.keys(files);
+    var actKeys = [];
+    var remKeys = [];
+    var keys = null;
+    var promises = [];
+
+    for(var i = 0, pat; pat = options.pattern[i++];) {
+      if(pat[0] != '!') {
+        keys = allKeys.filter(minimatch.filter(pat, { matchBase: true }));
+        actKeys = actKeys.concat(keys);
+        remKeys = remKeys.length ? remKeys.filter(minimatch.filter('!' + pat, { matchBase: true })) : remKeys;
+        // remKeys = remKeys.concat(keys);
+      }
+      else if(actKeys.length) {
+        actKeys = actKeys.filter(minimatch.filter(pat, { matchBase: true }));
+        keys = allKeys.filter(minimatch.filter(pat.slice(1), { matchBase: true }));
+        remKeys = remKeys.concat(keys);
+      }
+    }
+
+    for(var i = 0, key; key = actKeys[i++];) {
+      var file = files[key];
+      var css = file.contents.toString();
+
+      var promise = processor.process(css, {
+        from: path.join(metalsmith._source, key),
+        to: path.join(metalsmith._destination, key),
+        map: options.map
+      })
+      .then((function(file, result) {
+        // console.log(file, '\n-------------------------------------------');
+        file.contents = new Buffer(result.css);
+      }).bind(null, file));
+
+      promises.push(promise);
+    }
+
+    Promise.all(promises)
+      .then(function(results) {
+        for(var i = 0, key; key = remKeys[i++];) {
+          delete files[key];
+        }
+        // console.log(actKeys, remKeys, Object.keys(files));
+        done();
+      })
+      .catch(function(err) {
+        done(new Error('[metalsmith-with-postcss] Error during postcss processing: ' + JSON.stringify(err)));
+      });
+    
+  };
+}
