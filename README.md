@@ -77,4 +77,4 @@ metalsmith(__dirname)
     - __Description:__ A collection of plugin module names as keys and any options for them as values.
   - `map`
     - __Default value:__ {inline: true}
-    - __Description:__ Source mapping options passed directly to PostCSS.
+    - __Description:__ [Source mapping](https://github.com/postcss/postcss/blob/master/docs/source-maps.md) options passed directly to PostCSS.
