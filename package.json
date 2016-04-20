@@ -15,6 +15,7 @@
   ],
   "author": "Adrien de Pierres",
   "license": "MIT",
+  "repository": "arccoza/metalsmith-with-postcss",
   "dependencies": {
     "minimatch": "^3.0.0",
     "postcss": "^5.0.19"
