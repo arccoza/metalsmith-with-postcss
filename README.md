@@ -78,3 +78,6 @@ metalsmith(__dirname)
   - `map`
     - __Default value:__ {inline: true}
     - __Description:__ [Source mapping](https://github.com/postcss/postcss/blob/master/docs/source-maps.md) options passed directly to PostCSS.
+  - `removeExcluded`
+    - __Default value:__ false
+    - __Description:__ If `true` remove the files from metalsmith that were excluded by the `pattern`, so they won't appear in your build directory.
