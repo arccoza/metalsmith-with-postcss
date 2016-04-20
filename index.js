@@ -1,5 +1,4 @@
 var path = require('path');
-// var Promise = require('promise');
 var minimatch = require("minimatch");
 var postcss = require('postcss');
 
@@ -8,7 +7,8 @@ module.exports = exports = function(options) {
   var defaults = {
     pattern: ['**/*.css', '!**/_*/*', '!**/_*'],
     plugins: {},
-    map: {inline: true}
+    map: {inline: true},
+    removeExcluded: false
   }
   options = options ? Object.assign(defaults, options) : defaults;
   options.pattern = Array.isArray(options.pattern) ? options.pattern : [options.pattern];
@@ -68,8 +68,10 @@ module.exports = exports = function(options) {
 
     Promise.all(promises)
       .then(function(results) {
-        for(var i = 0, key; key = remKeys[i++];) {
-          delete files[key];
+        if(options.removeExcluded) {
+          for(var i = 0, key; key = remKeys[i++];) {
+            delete files[key];
+          }
         }
         // console.log(actKeys, remKeys, Object.keys(files));
         done();
