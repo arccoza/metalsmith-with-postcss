@@ -16,6 +16,10 @@
   "author": "Adrien de Pierres",
   "license": "MIT",
   "repository": "arccoza/metalsmith-with-postcss",
+  "bugs": {
+    "url": "https://github.com/arccoza/metalsmith-with-postcss/issues"
+  },
+  "homepage": "https://github.com/arccoza/metalsmith-with-postcss",
   "dependencies": {
     "minimatch": "^3.0.0",
     "postcss": "^5.0.19"
