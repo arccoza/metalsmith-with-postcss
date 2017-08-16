@@ -74,7 +74,7 @@ metalsmith(__dirname)
     - __Description:__ Only process files that match this pattern, can be an array of multiple patterns, following [multimatch](https://github.com/sindresorhus/multimatch) rules. The default patterns exclude any files or folders prefixed with an underscore.
   - `parser`
     - __Default value:__ undefined
-    - __Description:__ A parser module like [`require('sugarss')`](https://github.com/postcss/sugarss).
+    - __Description:__ A custom parser module like [`require('sugarss')`](https://github.com/postcss/sugarss).
   - `plugins`
     - __Default value:__ {}
     - __Description:__ A collection of plugin module names as keys and any options for them as values.
