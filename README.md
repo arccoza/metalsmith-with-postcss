@@ -58,7 +58,7 @@ metalsmith(__dirname)
       'autoprefixer': {}
     }
   }))
-  .use(rename)([[/\.sss$/, '.css']])) //Renames processed files to CSS
+  .use(rename([[/\.sss$/, '.css']])) //Renames processed files to CSS
   .use(markdown({
     gfm: true,
     tables: true
