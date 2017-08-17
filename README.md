@@ -44,7 +44,8 @@ metalsmith(__dirname)
   .source('src')
   .destination('pub')
   .use(postcss({
-    pattern: ['**/*.sss', '!**/_*/*', '!**/_*'], //For SugarSS
+    pattern: ['**/*.sss', '!**/_*/*', '!**/_*'], //For SugarSS,
+    parser: require('sugarss'),
     plugins: {
       'postcss-import': {},
       'postcss-if-media': {},
