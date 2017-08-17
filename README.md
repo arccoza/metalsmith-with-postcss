@@ -82,7 +82,7 @@ metalsmith(__dirname)
   - `stringifier`
     - __Default value:__ undefined
     - __Description:__ A [custom stringifier module](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
-  - `parser`
+  - `syntax`
     - __Default value:__ undefined
     - __Description:__ A [shorthand object for the parser and stringifier](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
   - `plugins`
