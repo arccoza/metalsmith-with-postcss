@@ -6,6 +6,9 @@ var postcss = require('postcss');
 module.exports = exports = function(options) {
   var defaults = {
     pattern: ['**/*.css', '!**/_*/*', '!**/_*'],
+    parser: undefined,
+    stringifier: undefined,
+    syntax: undefined,
     plugins: {},
     map: {inline: true},
     removeExcluded: false
@@ -56,6 +59,9 @@ module.exports = exports = function(options) {
       var promise = processor.process(css, {
         from: path.join(metalsmith._source, key),
         to: path.join(metalsmith._destination, key),
+        parser: options.parser,
+        stringifier: options.stringifier,
+        syntax: options.syntax,
         map: options.map
       })
       .then((function(file, result) {

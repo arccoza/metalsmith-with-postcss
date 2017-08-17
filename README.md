@@ -38,13 +38,16 @@ Build script example:
 var metalsmith = require('metalsmith');
 var markdown = require('metalsmith-markdown');
 var postcss = require('metalsmith-with-postcss');
+var sugarss = require('sugarss');
+var rename = require('metalsmith-rename';
 
 
 metalsmith(__dirname)
   .source('src')
   .destination('pub')
   .use(postcss({
-    pattern: ['**/*.css', '!**/_*/*', '!**/_*'], //This is the default.
+    pattern: ['**/*.sss', '!**/_*/*', '!**/_*'], //For SugarSS,
+    parser: sugarss,
     plugins: {
       'postcss-import': {},
       'postcss-if-media': {},
@@ -55,6 +58,7 @@ metalsmith(__dirname)
       'autoprefixer': {}
     }
   }))
+  .use(rename([[/\.sss$/, '.css']])) //Renames processed files to CSS
   .use(markdown({
     gfm: true,
     tables: true
@@ -72,6 +76,15 @@ metalsmith(__dirname)
   - `pattern`
     - __Default value:__ `['**/*.css', '!**/_*/*', '!**/_*']`
     - __Description:__ Only process files that match this pattern, can be an array of multiple patterns, following [multimatch](https://github.com/sindresorhus/multimatch) rules. The default patterns exclude any files or folders prefixed with an underscore.
+  - `parser`
+    - __Default value:__ undefined
+    - __Description:__ A [custom parser module](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
+  - `stringifier`
+    - __Default value:__ undefined
+    - __Description:__ A [custom stringifier module](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
+  - `syntax`
+    - __Default value:__ undefined
+    - __Description:__ A [shorthand object for the parser and stringifier](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
   - `plugins`
     - __Default value:__ {}
     - __Description:__ A collection of plugin module names as keys and any options for them as values.

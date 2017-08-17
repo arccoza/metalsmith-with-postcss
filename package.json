@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-with-postcss",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A Metalsmith plugin for PostCSS.",
   "main": "index.js",
   "scripts": {
@@ -22,6 +22,6 @@
   "homepage": "https://github.com/arccoza/metalsmith-with-postcss",
   "dependencies": {
     "minimatch": "^3.0.0",
-    "postcss": "^5.0.19"
+    "postcss": "6.x"
   }
 }
