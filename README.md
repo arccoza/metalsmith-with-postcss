@@ -38,6 +38,8 @@ Build script example:
 var metalsmith = require('metalsmith');
 var markdown = require('metalsmith-markdown');
 var postcss = require('metalsmith-with-postcss');
+var sugarss = require('sugarss');
+var rename = require('metalsmith-rename';
 
 
 metalsmith(__dirname)
@@ -45,7 +47,7 @@ metalsmith(__dirname)
   .destination('pub')
   .use(postcss({
     pattern: ['**/*.sss', '!**/_*/*', '!**/_*'], //For SugarSS,
-    parser: require('sugarss'),
+    parser: sugarss,
     plugins: {
       'postcss-import': {},
       'postcss-if-media': {},
@@ -56,7 +58,7 @@ metalsmith(__dirname)
       'autoprefixer': {}
     }
   }))
-  .use(require('metalsmith-rename')([[/\.sss$/, '.css']])) //Renames processed files to CSS
+  .use(rename)([[/\.sss$/, '.css']])) //Renames processed files to CSS
   .use(markdown({
     gfm: true,
     tables: true
