@@ -18,7 +18,7 @@ metalsmith.json config example:
 {
   "plugins": {
     "metalsmith-with-postcss": {
-      pattern: ['**/*.sss', '!**/_*/*', '!**/_*'], //For SugarSS
+      pattern: ['**/*.css', '!**/_*/*', '!**/_*'], //This is the default.
       parser: require('sugarss'),
       plugins: {
         'postcss-import': {},
