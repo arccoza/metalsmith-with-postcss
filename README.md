@@ -18,7 +18,8 @@ metalsmith.json config example:
 {
   "plugins": {
     "metalsmith-with-postcss": {
-      pattern: ['**/*.css', '!**/_*/*', '!**/_*'], //This is the default.
+      pattern: ['**/*.sss', '!**/_*/*', '!**/_*'], //For SugarSS
+      parser: require('sugarss'),
       plugins: {
         'postcss-import': {},
         'postcss-if-media': {},
@@ -44,7 +45,7 @@ metalsmith(__dirname)
   .source('src')
   .destination('pub')
   .use(postcss({
-    pattern: ['**/*.css', '!**/_*/*', '!**/_*'], //This is the default.
+    pattern: ['**/*.sss', '!**/_*/*', '!**/_*'], //For SugarSS
     plugins: {
       'postcss-import': {},
       'postcss-if-media': {},
@@ -55,6 +56,7 @@ metalsmith(__dirname)
       'autoprefixer': {}
     }
   }))
+  .use(require('metalsmith-rename')([[/\.sss$/, '.css']])) //Renames processed files to CSS
   .use(markdown({
     gfm: true,
     tables: true
@@ -74,7 +76,13 @@ metalsmith(__dirname)
     - __Description:__ Only process files that match this pattern, can be an array of multiple patterns, following [multimatch](https://github.com/sindresorhus/multimatch) rules. The default patterns exclude any files or folders prefixed with an underscore.
   - `parser`
     - __Default value:__ undefined
-    - __Description:__ A custom parser module like [`require('sugarss')`](https://github.com/postcss/sugarss).
+    - __Description:__ A [custom parser module](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
+  - `stringifier`
+    - __Default value:__ undefined
+    - __Description:__ A [custom stringifier module](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
+  - `parser`
+    - __Default value:__ undefined
+    - __Description:__ A [shorthand object for the parser and stringifier](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
   - `plugins`
     - __Default value:__ {}
     - __Description:__ A collection of plugin module names as keys and any options for them as values.
