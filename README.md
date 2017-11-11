@@ -73,24 +73,12 @@ metalsmith(__dirname)
 
 ## Options
 
-  - `pattern`
-    - __Default value:__ `['**/*.css', '!**/_*/*', '!**/_*']`
-    - __Description:__ Only process files that match this pattern, can be an array of multiple patterns, following [multimatch](https://github.com/sindresorhus/multimatch) rules. The default patterns exclude any files or folders prefixed with an underscore.
-  - `parser`
-    - __Default value:__ undefined
-    - __Description:__ A [custom parser module](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
-  - `stringifier`
-    - __Default value:__ undefined
-    - __Description:__ A [custom stringifier module](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
-  - `syntax`
-    - __Default value:__ undefined
-    - __Description:__ A [shorthand object for the parser and stringifier](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS.
-  - `plugins`
-    - __Default value:__ {}
-    - __Description:__ A collection of plugin module names as keys and any options for them as values.
-  - `map`
-    - __Default value:__ {inline: true}
-    - __Description:__ [Source mapping](https://github.com/postcss/postcss/blob/master/docs/source-maps.md) options passed directly to PostCSS.
-  - `removeExcluded`
-    - __Default value:__ false
-    - __Description:__ If `true` remove the files from metalsmith that were excluded by the `pattern`, so they won't appear in your build directory.
+| Option | Default Value | Description |
+| -----: | ------------- | ----------- |
+| `pattern`       | `['**/*.css', '!**/_*/*', '!**/_*']` | Only process files that match this pattern, can be an array of multiple patterns, following [multimatch](https://github.com/sindresorhus/multimatch) rules. The default patterns exclude any files or folders prefixed with an underscore. |
+| `parser`        | `undefined`     |   A [custom parser module](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS. |
+| `stringifier`    | `undefined`     |   A [custom stringifier module](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS. | 
+| `syntax`        | `undefined`     |   A [shorthand object for the parser and stringifier](http://api.postcss.org/global.html#processOptions) passed directly to PostCSS. | 
+| `plugins`       | `{}`           |   A collection of plugin module names as keys and any options for them as values. | 
+| `map`          | `{inline: true}`  |  [Source mapping](https://github.com/postcss/postcss/blob/master/docs/source-maps.md) options passed directly to PostCSS. | 
+| `removeExcluded` | `false`         |   If `true`, remove the files from metalsmith that were excluded by the `pattern`, so they won't appear in your build directory. | If `true`, remove the files from metalsmith that were excluded by the `pattern`, so they won't appear in your build directory.
